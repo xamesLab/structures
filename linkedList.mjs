@@ -9,6 +9,12 @@ export class LList {
         this.size++
     }
 
+    _clearList () {
+        this.size = 0
+        this.head = null
+        this.tail = null
+    }
+
     toStart (val) {
         let newNode = new Node(val)
 
@@ -60,9 +66,14 @@ export class LList {
             if(node.value === val) {
                 if(!prevNode) {
                     this.head = node.next
+                    if(this.size === 1) {
+                        this._clearList()
+                        return
+                    }
                 } else {
                     prevNode.next = node.next
                 }
+                this.size--
                 return
             }
             prevNode = node
